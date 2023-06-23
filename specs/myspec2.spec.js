@@ -22,7 +22,7 @@ describe("find created purchase order", function () {
         common.assertion.expectDefined(references);
         await common.assertion.expectDefined(references.purchaseOrderNumber);
         const POnumber = references.purchaseOrderNumber;
-        until.console.log(references.purchaseOrderNumber);
+        util.console.log(references.purchaseOrderNumber);
         await ui5.userInteraction.clearAndFill(selector, POnumber);
         
     });
@@ -47,7 +47,7 @@ describe("find created purchase order", function () {
         "elementProperties": {
             "viewName": "sap.suite.ui.generic.template.ListReport.view.ListReport",
             "metadata": "sap.ui.core.Icon",
-            "bindingContextPath": "*$[references.purchaseOrderNumber]*"
+            "bindingContextPath": `*${references.purchaseOrderNumber}*`
         }
         };    
         await ui5.userInteraction.click(selector);
@@ -61,13 +61,13 @@ describe("find created purchase order", function () {
         "id": "*template::ObjectPage::ObjectPageDynamicHeaderTitle"
         }
         };    
-       const PurchaseOrderID = await ui5.element.getPropertyValue(selector, "text");
+    
      
 // use reference
         const references = browser.config.params.import.data["references"];
         common.assertion.expectDefined(references);
         await common.assertion.expectDefined(references.purchaseOrderNumber);
-        await Ui5.assertion.expectAttributeToBe(selector,"text",references.purchaseOrderNumber)
+        await ui5.assertion.expectAttributeToBe(selector,"text", references.purchaseOrderNumber);
         
         });  
 

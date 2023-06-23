@@ -1,8 +1,16 @@
 require('dotenv').config();
+var StandardZPO = require("../data/StandardZPO.json");
+// var ObjectPage = require("../module/ObjectPage.js");
+// var elementsData = require("../data/elementsData.json");
+var generalData = require("../data/generalData.json");
+
+//var ListReport = require("../module/ListReport.js");
+
 describe("create a new purchase order", function () {
 
     it("Step 01: Navigate to the system and open MPO app", async function () {
-    await ui5.navigation.navigateToApplication("PurchaseOrder-manage")
+    await ui5.navigation.navigateToApplication(generalData.AppName)
+     
 });
 
     it("Step 02: Log in", async function () {
@@ -10,15 +18,19 @@ describe("create a new purchase order", function () {
    });
 
     it("Step 03: Click Create PO", async function () {
-    const selector = {
-    "elementProperties": {
-        "viewName": "sap.suite.ui.generic.template.ListReport.view.ListReport",
-        "metadata": "sap.m.Button",
-        "id": "*addEntry"
-    }
-    };    
-    await ui5.userInteraction.click(selector);
-   
+     const selector = {
+     "elementProperties": {
+         "viewName": "sap.suite.ui.generic.template.ListReport.view.ListReport",
+         "metadata": "sap.m.Button",
+         "id": "*addEntry"
+     }
+     };    
+     await ui5.userInteraction.click(selector);
+
+//   await listReport.clickCreatefromLR(
+//     elementsData.button.createNewPO.metadata,
+//     elementsData.button.createNewPO.id
+  // );
 
     });
 
@@ -30,8 +42,7 @@ describe("create a new purchase order", function () {
     "id": "*PurchaseOrderType::Field-comboBoxEdit"
             }
             };  
-            actualValue = "Standard Z-PO (ZNB)"  
-            await ui5.userInteraction.selectComboBox(selector, actualValue);
+            await ui5.userInteraction.selectComboBox(selector, StandardZPO.GeneralInformation.PurchaseOrderType);
 
     });
 
@@ -43,8 +54,7 @@ describe("create a new purchase order", function () {
         "id": "*GeneralInformationFacet1::Supplier::Field-input"
         }
         };    
-        actualValue = "50000040"
-        await ui5.userInteraction.clearAndFill(selector, actualValue);
+        await ui5.userInteraction.clearAndFill(selector, StandardZPO.GeneralInformation.Supplier);
         await common.userInteraction.pressEnter();
 
 
@@ -58,8 +68,7 @@ describe("create a new purchase order", function () {
         "id": "*GeneralInformationFacet1::DocumentCurrency::Field-input"
         }
         };    
-        actualValue = "EUR"
-        await ui5.userInteraction.clearAndFill(selector, actualValue);
+        await ui5.userInteraction.clearAndFill(selector, StandardZPO.GeneralInformation.Currency);
         await common.userInteraction.pressEnter();
     });
     
@@ -71,8 +80,7 @@ describe("create a new purchase order", function () {
         "id": "*GeneralInformationFacet2::PurchasingGroup::Field-input"
         }
         };    
-        actualValue = "001"
-        await ui5.userInteraction.clearAndFill(selector, actualValue);
+        await ui5.userInteraction.clearAndFill(selector, StandardZPO.GeneralInformation.PurchasingGroup);
         await common.userInteraction.pressEnter();
 
      });
@@ -85,8 +93,7 @@ describe("create a new purchase order", function () {
         "id": "*GeneralInformationFacet2::PurchasingOrganization::Field-input"
         }
         };    
-        actualValue = "1010"
-        await ui5.userInteraction.clearAndFill(selector, actualValue);
+        await ui5.userInteraction.clearAndFill(selector, StandardZPO.GeneralInformation.PurchasingOrganization);
         await common.userInteraction.pressEnter();
 
 
@@ -100,8 +107,8 @@ describe("create a new purchase order", function () {
     "id": "*GeneralInformationFacet2::CompanyCode::Field-input"
     }
     };    
-    actualValue = "1010"
-    await ui5.userInteraction.clearAndFill(selector, actualValue);
+    
+    await ui5.userInteraction.clearAndFill(selector, StandardZPO.GeneralInformation.CompanyCode);
     await common.userInteraction.pressEnter();
       
     });
@@ -117,6 +124,7 @@ describe("create a new purchase order", function () {
         await ui5.userInteraction.click(selector);
 
     });
+    
 
     it("Step 11: Add item line - Click Create item", async function () {
         const selector = {
@@ -129,20 +137,28 @@ describe("create a new purchase order", function () {
         await ui5.userInteraction.click(selector);
            });	 
 
-    it("Step 12: Select Item Category: Standard", async function () {
+   it("Step 12: Select Item Category: Standard", async function () {
     const selector = {
     "elementProperties": {
     "viewName": "sap.suite.ui.generic.template.ObjectPage.view.Details",
     "metadata": "sap.m.ComboBox",
-    "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='00010'*"
-  //  "value": [{
-  //      path: "PurOrdExternalItemCategory"
-  //  }]
+    "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='00010'*",
+   // "value": [{
+    //"path": "PurOrdExternalItemCategory"
+    // was not added initially by me
+  // }]
      }
-     };  
-         actualValue = "Standard"  
+     };
+     
+     actualValue = "Standard"  
          await ui5.userInteraction.selectComboBox(selector, actualValue);
- 
+
+    //    await ui5.userInteraction.selectComboBox(selector, StandardZPO.Items[00010].ItemCategory);
+    //     await ObjectPage.fillInFields(elementsData.field.itemCategory.type,
+    //       elementsData.field.itemCategory.metadata,
+    //       elementsData.field.itemCategory.path,
+    //       StandardZPO.Items[00010].ItemCategory);
+                     
     });
     
     it("Step 13: Fill in Material: WM-DO3", async function () {
@@ -152,13 +168,15 @@ describe("create a new purchase order", function () {
         "metadata": "sap.m.Input",
         "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='00010'*",
        // "value": [{
-       //     path: "ManufacturerMaterial"
+       //  "path": "ManufacturerMaterial"  was not added initially by me
        // }]
         }
-        };    
+        };
         actualValue = "WM-D03"
         await ui5.userInteraction.clearAndFill(selector, actualValue);
-        //await common.userInteraction.pressEnter();
+
+      //  await ui5.userInteraction.clearAndFill(selector, StandardZPO.Items[`00010`].Material);
+       //await common.userInteraction.pressEnter();
        // doesn't always fills in other fields, like Plant 
         });  
 
@@ -175,8 +193,38 @@ describe("create a new purchase order", function () {
         };    
         actualValue = "10"
         await ui5.userInteraction.clearAndFill(selector, actualValue);
+
+     //   await ui5.userInteraction.clearAndFill(selector, StandardZPO.Items[`00010`].OrderQuantity);
         
     });
+
+    it("Step 14_1: Open created Item", async function () {
+        const selector = {
+        "elementProperties": {
+            "viewName": "sap.suite.ui.generic.template.ObjectPage.view.Details",
+            "metadata": "sap.ui.core.Icon",
+            "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='00010'*",
+            "src": "sap-icon://slim-arrow-right"
+        
+        }
+        };
+        await ui5.userInteraction.click(selector);
+
+
+    });
+
+    it("Step 14_2: Click Apply", async function () {
+        const selector = {
+        "elementProperties": {
+        "viewName": "sap.suite.ui.generic.template.ObjectPage.view.Details",
+        "metadata": "sap.m.Button",
+        "id": "*footerObjectPageBackTo"
+        }
+        };    
+        await ui5.userInteraction.click(selector);
+        });
+
+
     it("Step 15: Click Create in footer", async function () {
         const selector = {
         "elementProperties": {
@@ -188,7 +236,7 @@ describe("create a new purchase order", function () {
         await ui5.userInteraction.click(selector);
         });
 
-       
+            
         it("Step 16: get purchase order id", async function () {
         const selector = {
         "elementProperties": {
@@ -198,8 +246,14 @@ describe("create a new purchase order", function () {
         }
         };    
         const PurchaseOrderID = await ui5.element.getPropertyValue(selector, "text");
-         
-// use reference
+        util.console.log(PurchaseOrderID);
+        const userData = {
+            "purchaseOrder": PurchaseOrderID
+        };
+        browser.config.params.export.PurchaseOrder = userData;
+
+  // use reference      
+
         const references = browser.config.params.import.data["references"];
         references.purchaseOrderNumber = PurchaseOrderID;
         });        
@@ -208,5 +262,5 @@ describe("create a new purchase order", function () {
     await ui5.session.logout();
 
     });      
-
+    
 });

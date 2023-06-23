@@ -1,0 +1,28 @@
+{
+    
+    "GeneralInformation": {
+        "PurchaseOrderType": "Standard Z-PO (ZNB)",
+        "Supplier": "50000040",
+        "Currency": "EUR",
+        "PurchasingGroup": "001",
+        "PurchasingOrganization": "1010",
+        "CompanyCode": "1010"
+
+    },
+
+    "Items": [
+    {
+    "Item": "00010",
+    "ItemCategory": "Standard",
+    "Material": "WM-DO3",
+    "OrderQuantity": "10"
+    },
+
+    {
+        "Item": "00020",
+        "ItemCategory": "Standard",
+        "Material": "WM-DO3",
+        "OrderQuantity": "10"
+        }
+    ]
+}
