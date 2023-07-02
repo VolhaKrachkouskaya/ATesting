@@ -14,14 +14,16 @@
     {
     "Item": "00010",
     "ItemCategory": "Standard",
-    "Material": "WM-DO3",
+    "Material": "WM-D03",
+    "Plant": "1010",
     "OrderQuantity": "10"
     },
 
     {
         "Item": "00020",
         "ItemCategory": "Standard",
-        "Material": "WM-DO3",
+        "Material": "WM-D03",
+        "Plant": "1010",
         "OrderQuantity": "10"
         }
     ]

@@ -1,7 +1,11 @@
 const QmateService = require("@sap_oss/wdio-qmate-service");
 
 exports.config = {
-
+  logLevel: 'silent',
+  logLevels: {
+          webdriver: 'silent',
+          webdriverio: 'silent'
+  },
 baseUrl: "https://us4.leverx.local:44302/sap/bc/ui2/flp",
 
 specs: [
@@ -39,7 +43,7 @@ maxInstances: 3,
       'goog:chromeOptions': {
           args: [
               "--output=/dev/null",
-              "--log-level=3",
+              "--log-level=1",
               "--no-sandbox",
               "--incognito",
               "--ignore-certificate-errors",
@@ -47,7 +51,7 @@ maxInstances: 3,
               "--window-size=1920,1200",
               "--whitelisted-ips",
               "--disable-dev-shm-usage",
-              //"--headless",
+             "--headless",
               "--disable-gpu",
               "--disable-web-security",
               "--disable-infobars",
@@ -64,7 +68,7 @@ maxInstances: 3,
 
 
 mochaOpts: {
-  timeout: 90000,
+  timeout: 120000,
   bail: true
 },
 

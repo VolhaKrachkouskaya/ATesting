@@ -35,23 +35,29 @@
             "id": "CompanyCode" 
         },
 
-        "itemCategory": {
-            "type": "Item",
-            "metadata": "sap.m.ComboBox",
-            "path": ""
-        },
-
+       
         "itemMaterial": {
             "type": "Item",
             "metadata": "sap.m.Input",
-            "path": ""
+            "path": "",
+            "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='"
         
         },
 
         "itemQuantity": {
             "type": "Item",
             "metadata": "sap.m.Input",
-            "path": "OrderQuantity"
+            "path": "OrderQuantity",
+            "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='"
+        
+        },
+
+        "plant": {
+            "type": "Item",
+            "metadata": "sap.m.Input",
+            "path": "Plant",   
+            "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='"
+        
         }
     },
 
@@ -61,6 +67,14 @@
             "type": "ComboBox",
             "metadata": "sap.m.ComboBox",
             "id": "PurchaseOrderType::Field-comboBoxEdit" 
+        },
+
+        "itemCategory": {
+            "type": "ComboBox",
+            "metadata": "sap.m.ComboBox",
+            "path": "",
+            "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='"
+        
         }
     },
 
