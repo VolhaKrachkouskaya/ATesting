@@ -26,7 +26,7 @@
         "purchasingOrganization": {
             "type": "ID",
             "metadata": "sap.m.Input",
-            "id": "PurchasingOrganisation"  
+            "id": "GeneralInformationFacet2::PurchasingOrganization::Field-input"  
         },
 
         "companyCode": {
@@ -60,7 +60,7 @@
         "purchaseOrderType": {
             "type": "ComboBox",
             "metadata": "sap.m.ComboBox",
-            "id": "PurchaseOrderType" 
+            "id": "PurchaseOrderType::Field-comboBoxEdit" 
         }
     },
 
@@ -84,6 +84,17 @@
         "createPOinFooter": {
         "metadata": "sap.m.Button",
         "id": "*activate"
+        },
+
+        "openCreatedItem": {
+        "metadata": "sap.m.Button",
+        "path": ""
+        },
+
+        "clickApply": {
+        "metadata": "sap.m.Button",
+        "id": "*footerObjectPageBackTo"
         }
+
     }
 }

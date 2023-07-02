@@ -12,7 +12,9 @@ var ObjectPage = function() {
                         "id": `*${id}*`
                     }
                 };
-                await ui5.userInteraction.clearAndFill(selector, value, index);    
+                await ui5.userInteraction.clearAndFill(selector, value, index);
+                await common.userInteraction.pressEnter();
+
             }
             else if (type === "ComboBox") {
                 const selector = {
@@ -20,13 +22,13 @@ var ObjectPage = function() {
                         "viewName": viewName,
                         "metadata": `${metadata}`,
                         "id": `*${id}*`
-        }
-    };
-    await ui5.userInteraction.selectComboBox(selector, value, index);      
+             }
+            };
+                await ui5.userInteraction.selectComboBox(selector, value, index);      
 }
-else if (type === "Item") {
-    const selector = {
-        "elementProperties": {
+            else if (type === "Item") {
+            const selector = {
+            "elementProperties": {
             "viewName": viewName,
             "metadata": `${metadata}`,
             "bindingContextPath": "/C_PurchaseOrderItemTP*PurchaseOrder=''*PurchaseOrderItem='${index}'*",
@@ -35,10 +37,37 @@ else if (type === "Item") {
         }]        
     }
 };
-await ui5.userInteraction.clearAndFill(selector, value);      
+            await ui5.userInteraction.clearAndFill(selector, value);      
 }
 
-    }; 
+}; 
+
+
+this.AddItem = async function(metadata, id) {
+  
+        const selector = {
+            "elementProperties": {
+                "viewName": viewName,
+                "metadata": `${metadata}`,
+                "id": `*${id}*`
+            }
+        };
+        await ui5.userInteraction.click(selector);    
+
+}
 };
 
-module.exports = new ObjectPage();
+this.navigateToItems = async function(metadata, id) {
+  
+    const selector = {
+        "elementProperties": {
+            "viewName": viewName,
+            "metadata": `${metadata}`,
+            "id": `*${id}*`
+        }
+    };
+    await ui5.userInteraction.click(selector);    
+
+};
+
+    module.exports = new ObjectPage();
